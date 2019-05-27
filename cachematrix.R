@@ -15,13 +15,13 @@ makeCacheMatrix <- function(x = matrix()) {
 
 # Make a cache function to store the result of the inverse matrix and return the result without calculating it
 cacheSolve <- function(x, ...) {
-  m <- x[[4]]()    #m is the result from function getinverse
+  m <- x$getinverse()    #m is the result from function getinverse
   if(!is.null(m)) {  #if there is a stored value in the cache
     message("getting cached data")  #print the message
     return(m)  #and return the inverse matrix without calculating it
   }
-  data <- x[[2]]()
+  data <- x$get()
   m <- solve(data, ...) 
-  x[[3]](m)
+  x$setinverse(m)
   m             #when there is no result stored, calculate the inverse matrix
 }
